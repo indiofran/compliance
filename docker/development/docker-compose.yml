@@ -1,0 +1,41 @@
+version: '3.6'
+
+services:
+  compliance_mysql:
+    image: mysql:5.7
+    container_name: compliance_mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - compliance-db-data:/var/lib/mysql
+
+  compliance_redis:
+    image: redis:5.0
+    container_name: compliance_redis
+    volumes:
+      - compliance-redis-data:/data
+
+  compliance:
+    container_name: dev_compliance
+    build:
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+      args:
+        RAILS_FOLDER: ${RAILS_GUEST_FOLDER}
+    stdin_open: true
+    tty: true
+
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p ${RAILS_GUEST_PORT} -b '0.0.0.0'" 
+    depends_on:
+      - compliance_mysql
+      - compliance_redis
+    volumes:
+     - "${RAILS_HOST_FOLDER}:${RAILS_GUEST_FOLDER}"
+    ports:
+      - "${RAILS_HOST_PORT}:${RAILS_GUEST_PORT}"
+
+volumes:
+  compliance-redis-data:
+  compliance-db-data:
