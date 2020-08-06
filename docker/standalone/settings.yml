@@ -11,9 +11,10 @@ defaults: &defaults
     secret: some_secret
 
   mysql:
+    host: compliance_standalone_mysql
+    port: 3306
     username: root
     password: 
-    socket: /var/run/mysqld/mysqld.sock
 
   exception_recipients: "some@me.com,other@me.com"
 

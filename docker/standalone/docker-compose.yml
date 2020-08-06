@@ -1,0 +1,31 @@
+version: '3.6'
+
+services:
+  compliance_standalone_mysql:
+    image: mysql:5.7
+    container_name: compliance_standalone_mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
+  compliance_standalone_redis:
+    image: redis:5.0
+    container_name: compliance_standalone_redis
+
+  compliance_standalone:
+    container_name: compliance_standalone
+    build:
+      context: ../../
+      dockerfile: docker/standalone/Dockerfile
+      args:
+        RAILS_FOLDER: /usr/local/compliance
+    stdin_open: true
+    tty: true
+
+    command: bash -c "rm -f tmp/pids/server.pid && bundle install && bundle exec rails db:setup && bundle exec rails s -p 5000 -b '0.0.0.0'" 
+    depends_on:
+      - compliance_standalone_mysql
+      - compliance_standalone_redis
+    ports:
+      - 5000:5000
