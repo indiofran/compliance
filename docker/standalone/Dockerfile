@@ -8,9 +8,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ARG RAILS_FOLDER
 
+WORKDIR ${RAILS_FOLDER}
+
 RUN git clone https://github.com/bitex-la/compliance.git ${RAILS_FOLDER} \
     && cp ${RAILS_FOLDER}/docker/standalone/settings.yml ${RAILS_FOLDER}/config/settings.yml
 
 EXPOSE 5000
 
-WORKDIR ${RAILS_FOLDER}
+RUN bundle install
