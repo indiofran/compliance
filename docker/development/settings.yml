@@ -14,7 +14,7 @@ development:
     host: compliance_mysql
     port: 3306
     username: root
-    password: password
+    password:
 
   exception_recipients: "some@me.com,other@me.com"
 
