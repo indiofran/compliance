@@ -1,4 +1,4 @@
-defaults: &defaults
+development:
   secret_key_base: secret_key_base_for_staging_tries_to_be_a_bit_longer_than_before_just_to_make_sure_its_useful
   
   s3:                                                                              
@@ -34,18 +34,6 @@ defaults: &defaults
     expiration_interval_minutes: 15
 
   redis:
-    cache_url: 'unix:/tmp/redis.sock'
+    cache_url: 'compliance_standalone_redis'
     namespace: 'compliance'
     pool_size: 8
-
-production:
-  <<: *defaults
-
-staging:
-  <<: *defaults
-
-development:
-  <<: *defaults
-
-test:
-  <<: *defaults
