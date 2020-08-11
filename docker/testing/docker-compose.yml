@@ -1,0 +1,33 @@
+version: '3.6'
+
+services:
+  compliance_mysql:
+    image: mysql:5.7
+    container_name: test_compliance_mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
+  compliance_redis:
+    image: redis:5.0
+    container_name: test_compliance_redis
+
+  compliance:
+    container_name: test_compliance
+    build:
+      context: ../../
+      dockerfile: docker/testing/Dockerfile
+      args:
+        RAILS_FOLDER: ${RAILS_GUEST_FOLDER}
+    environment:
+      RAILS_ENV: test
+    stdin_open: true
+    tty: true
+
+    command: bash -c "cp ${RAILS_GUEST_FOLDER}/docker/settings.yml ${RAILS_GUEST_FOLDER}/config/settings.yml && bundle exec rake db:drop && bundle exec rake db:setup && tail -f /dev/null" 
+    depends_on:
+      - compliance_mysql
+      - compliance_redis
+    volumes:
+     - "${RAILS_HOST_FOLDER}:${RAILS_GUEST_FOLDER}"

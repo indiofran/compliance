@@ -17,4 +17,3 @@ COPY Gemfile ${RAILS_FOLDER}
 COPY Gemfile.lock ${RAILS_FOLDER}
 RUN bundle install
 COPY . ${RAILS_FOLDER}
-COPY ${RAILS_GUEST_FOLDER}/docker/development/settings.yml ${RAILS_GUEST_FOLDER}/config/settings.yml
