@@ -26,7 +26,13 @@ services:
     stdin_open: true
     tty: true
 
-    command: bash -c "cp ${RAILS_GUEST_FOLDER}/docker/settings.yml ${RAILS_GUEST_FOLDER}/config/settings.yml && bundle exec rake db:drop && bundle exec rake db:setup && tail -f /dev/null" 
+    command: >
+      bash -c "dockerize -wait tcp://test_compliance_mysql:3306 -timeout 300s &&
+               dockerize -wait tcp://test_compliance_redis:6379 -timeout 300s &&
+               cp ${RAILS_GUEST_FOLDER}/docker/settings.yml ${RAILS_GUEST_FOLDER}/config/settings.yml &&
+               bundle exec rake db:drop &&
+               bundle exec rake db:setup &&
+               tail -f /dev/null" 
     depends_on:
       - compliance_mysql
       - compliance_redis

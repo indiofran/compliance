@@ -15,6 +15,14 @@ RUN cd /tmp \
     && mv geckodriver /usr/bin \
     && chmod +x /usr/bin/geckodriver
 
+# Install dockerize
+RUN cd /tmp \ 
+     && wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz \
+     && tar -xvzf dockerize-linux-amd64-v0.6.1.tar.gz \
+     && rm dockerize-linux-amd64-v0.6.1.tar.gz \
+     && mv dockerize  /usr/bin \
+     && chmod +x /usr/bin/dockerize
+
 ARG RAILS_FOLDER
 
 RUN mkdir ${RAILS_FOLDER}
