@@ -51,6 +51,10 @@ development:
     port: 3306
     username: root
     password: 
+  redis:
+    cache_url: 'redis://compliance_redis:6379/0/cache'
+    namespace: 'compliance'
+    pool_size: 8
 
 test:
   <<: *defaults
@@ -59,3 +63,7 @@ test:
     port: 3306
     username: root
     password: 
+  redis:
+    cache_url: 'redis://test_compliance_redis:6379/0/cache'
+    namespace: 'compliance'
+    pool_size: 8
