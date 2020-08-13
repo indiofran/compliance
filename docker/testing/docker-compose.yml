@@ -22,6 +22,7 @@ services:
         RAILS_FOLDER: ${RAILS_GUEST_FOLDER}
     environment:
       RAILS_ENV: test
+      SELENIUM_HEADLESS: 'true'
     stdin_open: true
     tty: true
 
