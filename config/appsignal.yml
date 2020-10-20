@@ -1,7 +1,7 @@
 default: &defaults
   # Your push api key, it is possible to set this dynamically using ERB:
-   push_api_key: "<%= ENV['APPSIGNAL_PUSH_API_KEY'] %>"
-  #push_api_key: ""
+  # push_api_key: "<%= ENV['APPSIGNAL_PUSH_API_KEY'] %>"
+  push_api_key: "d196b552-b0ac-47cf-8b04-e0f198126a3a"
 
   # Your app's name
   name: "Open Compliance"
