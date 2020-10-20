@@ -56,10 +56,10 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
-  config.cache_store = :redis_cache_store, { url: Settings.redis.cache_url,
-    namespace: Settings.redis.namespace,
+  config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'],
+    namespace: ENV['REDIS_NAMESPACE'],
     expires_in: 60.seconds,
-    pool_size: Settings.redis.pool_size,
+    pool_size: ENV['REDIS_POOL_SIZE'],
 
     error_handler: -> (method:, returning:, exception:) {
       ExceptionNotifier.notify_exception(exception)
