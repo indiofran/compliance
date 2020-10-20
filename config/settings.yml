@@ -11,9 +11,9 @@ defaults: &defaults
     secret: some_secret
 
   mysql:
-    username: bd103842d9ad0a
-    password: 47d8fdb6 
-    host: us-cdbr-east-02.cleardb.com/heroku_0f85f9282fa4bcd?reconnect=true
+    username: 'bd103842d9ad0a'
+    password: '47d8fdb6' 
+    host: 'us-cdbr-east-02.cleardb.com/heroku_0f85f9282fa4bcd?reconnect=true'
     port: 3306
 
   exception_recipients: "some@me.com,other@me.com"
@@ -30,7 +30,7 @@ defaults: &defaults
     expiration_interval_minutes: 15
   
   redis:
-    cache_url: '    redis://:p35d7b0ae3eea6ba4495d45cd4b5e549436905651039737539db7415b3192921f@ec2-3-224-193-62.compute-1.amazonaws.com:22519'
+    cache_url: 'redis://:p35d7b0ae3eea6ba4495d45cd4b5e549436905651039737539db7415b3192921f@ec2-3-224-193-62.compute-1.amazonaws.com:22519'
     namespace: 'compliance'
     pool_size: 8
 
