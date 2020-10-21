@@ -3,30 +3,30 @@ default: &default
   encoding: utf8mb4
   pool: <%= Settings.mysql.try(:pool) || 64 %>
   timeout: <%= Settings.mysql.try(:timeout) || 5000 %>
-  username: <%= Settings.mysql.username %>
-  password: <%= Settings.mysql.password %>
+  username: 'bd103842d9ad0a'
+  password: '47d8fdb6'
 <% if Settings.mysql.try(:socket) %>
   socket: <%= Settings.mysql.socket %>
 <% else %>
-  host: <%= Settings.mysql.host %>
-  port: <%= Settings.mysql.port %>
+  host: 'us-cdbr-east-02.cleardb.com/heroku_0f85f9282fa4bcd?reconnect=true'
+  port: 3360
 <% end %>
 
 development:
   <<: *default
-  database: <%= Settings.mysql.try(:database) || "compliance_development" %>
+  database: 'heroku_0f85f9282fa4bcd'
   
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: <%= Settings.mysql.try(:database) || "compliance_test" %>
+  database:  'heroku_0f85f9282fa4bcd'
   
 staging:
   <<: *default
-  database: <%= Settings.mysql.try(:database) || "compliance_staging" %>
+  database:  'heroku_0f85f9282fa4bcd'
   
 production:
   <<: *default
-  database: <%= Settings.mysql.try(:database) || "compliance_production" %>
+  database:  'heroku_0f85f9282fa4bcd'
